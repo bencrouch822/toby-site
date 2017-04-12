@@ -1,0 +1,25 @@
+<div class="row">
+
+  {{#if posts}}
+    {{#each posts}}
+      
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="posts/{{image}}">
+        <div class="caption">
+          <h3>{{caption}}</h3>
+          <p>By {{author}}</p>
+          <p>
+            <a href="#" class="btn btn-default" role="button">Comment</a>
+
+            <a href="#" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> &nbsp;Like</a> 
+          </p>
+          
+        </div>
+      </div>
+    </div>
+
+    {{/each}}
+  {{/if}}
+
+</div>
