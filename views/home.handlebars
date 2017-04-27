@@ -5,16 +5,16 @@
       
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <img src="posts/{{image}}">
+        <a href="/post/{{_id}}"><img src="posts/{{image}}"></a>
         <div class="caption">
-          <h3>{{caption}}</h3>
+          <a href="/post/{{_id}}"><h3>{{caption}}</h3></a>
           <p>By {{author}}</p>
-          <p>
-            <a href="#" class="btn btn-default" role="button">Comment</a>
-
-            <a href="#" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> &nbsp;Like</a> 
+          <form method="POST" action="/post/addLike/{{_id}}/generalAcct">
+          <p>            
+              <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span> &nbsp;Like</button>
+            | <strong>{{likes.length}} likes</strong>
           </p>
-          
+          </form>
         </div>
       </div>
     </div>

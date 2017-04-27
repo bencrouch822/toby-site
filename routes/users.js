@@ -22,6 +22,7 @@ router.post('/signup', function(req, res){
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('password', 'Password must be 6 characters in length').len(6);
+    req.checkBody('password', 'Password must contain letters and numbers.').isAlpha() == false;
     req.checkBody('passwordConfirm', 'Passwords much match').equals(req.body.password);
 
     var errors = req.validationErrors();

@@ -26,3 +26,8 @@ var Post = module.exports = mongoose.model('Post', PostSchema);
 module.exports.createPost = function(newPost, callback){
     newPost.save(callback);
 };
+
+module.exports.findPostbyId = function(id, callback){
+    var query = {_id: id};
+    Post.findOne(query, callback);
+};

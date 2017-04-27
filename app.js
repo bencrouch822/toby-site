@@ -90,7 +90,6 @@ app.get('/', function(req, res){
                 if(err){
                     res.send(err);
                 } else if(result.length){
-                    console.log(result);
                     posts = result;
                 } else {
                     console.log(`No results found`);

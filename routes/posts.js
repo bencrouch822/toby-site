@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var mongo = require('mongodb').MongoClient;
+var dbUrl = "mongodb://localhost:27017/toby";
+var ObjectID = require('mongodb').ObjectID;   
 
 //Models
 var Post = require('../models/Post');
@@ -11,8 +14,6 @@ router.get('/new', ensureAuthenticated, function(req, res){
 router.post('/new', function(req, res){
     var caption = req.body.caption;
     req.checkBody('caption', 'Caption is required').notEmpty();
-
-    console.log(req.user.username +"");
     
     if(!req.files.image){
         console.log("Err: No files attached at upload [posts.js /new]");
@@ -45,6 +46,30 @@ router.post('/new', function(req, res){
         });
     }
 });
+
+router.get('/post/:pid', function(req, res){
+    var postID = req.params.pid;
+
+    Post.findPostbyId(postID, function(err, post) {
+        res.render('postview', {post: post});
+    });
+
+});
+
+router.post('/post/addLike/:pid/:user', ensureAuthenticated, function(req, res){
+    var postID = req.params.pid;
+    var user = req.params.user;
+
+    Post.findPostbyId(postID, function(err, post) {
+        post.likes.push({'user': user});
+        Post.update({'_id': post._id}, post, function(err, post){
+            res.redirect('/');
+        });
+    });
+});
+
+
+
 
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
